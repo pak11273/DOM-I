@@ -40,3 +40,11 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+// Create selectors by using any of the DOM element's methods
+let nav = document.querySelectorAll(".container nav a")
+
+let arrNav = Array.from(nav)
+for(let i=1;i<arrNav.length + 1;i++) {
+  arrNav[i-1].textContent = siteContent.nav[`nav-item-${i}`]
+}
