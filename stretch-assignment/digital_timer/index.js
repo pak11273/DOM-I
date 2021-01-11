@@ -3,6 +3,7 @@ const secondTens = document.querySelector("#secondTens")
 const secondOnes = document.querySelector("#secondOnes")
 const colon = document.querySelector("#colon")
 const msHundreds = document.querySelector("#msHundreds")
+const digits = document.querySelector(".digits")
 
 const hands = {
     msTens,
@@ -26,7 +27,7 @@ class Timer {
         let msHundredsCounter = 1
         let secondOnesCounter = 1
         let secondTensCounter = 1
-            setInterval(x => {
+        let timer =  setInterval(x => {
                 if(tensCounter > 10) {
                     tensCounter = 1 
                 }
@@ -48,10 +49,16 @@ class Timer {
                                 if(secondOnesCounter > 10) {
                                     secondOnesCounter = 1 
                                 }
+
+
                                 if(secondOnesCounter === 10) {
                                     this.secondOnes.textContent = 0 
 
                                     if(secondOnesCounter === 10) {
+                                        
+                                        // changes color to red at 10sec
+                                        digits.classList.add("red")
+
                                             if(secondTensCounter > 10) {
                                                 secondTensCounter = 1 
                                             }
@@ -61,6 +68,7 @@ class Timer {
                                             } else {
                                                 this.secondTens.textContent = secondTensCounter 
                                             }
+
                                             secondTensCounter++
                                     }
 
@@ -79,12 +87,38 @@ class Timer {
 
                 tensCounter++
             }, 10)
+
+            // stops timer after 10secs
+            setTimeout(() => {
+                clearInterval(timer)
+            },10000)
     }
 }
 
 const Clock = new Timer(hands)
 
-const button = document.querySelector(".startButton")
-button.addEventListener("click", () => {
+const startBtn = document.querySelector(".startButton")
+startBtn.addEventListener("click", () => {
+    digits.classList.remove("red")
+    msTens.textContent = "-"
+    secondTens.textContent = "-"
+    secondOnes.textContent = "-"
+    msHundreds.textContent = "-"
     Clock.startTimer()
+    startBtn.children[0].disabled = true
+    startBtn.children[0].style.backgroundColor = "gray"
+    startBtn.children[0].style.opacity = "50%"
+})
+
+const resetBtn = document.querySelector(".resetButton")
+
+resetBtn.addEventListener("click", () => {
+    digits.classList.remove("red")
+    startBtn.children[0].disabled = false 
+    startBtn.children[0].style.backgroundColor = "green" 
+    startBtn.children[0].style.opacity = "100%" 
+    msTens.textContent = "-"
+    secondTens.textContent = "-"
+    secondOnes.textContent = "-"
+    msHundreds.textContent = "-"
 })
