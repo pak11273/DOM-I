@@ -1,5 +1,6 @@
 body {
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
 }
@@ -11,4 +12,12 @@ body {
 
 .redDigit {
   color: red;
+}
+
+.timer {
+  display: block;
+}
+
+.startButton {
+  display: block;
 }
